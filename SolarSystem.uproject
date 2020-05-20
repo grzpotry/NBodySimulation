@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{1C7D2325-4221-FD8F-2603-BDBD3A630F88}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "SolarSystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
