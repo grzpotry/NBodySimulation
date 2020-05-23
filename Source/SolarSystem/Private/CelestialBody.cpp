@@ -16,6 +16,7 @@ void ACelestialBody::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Velocity = InitialVelocity;
 }
 
 // Called every frame
@@ -23,9 +24,8 @@ void ACelestialBody::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FVector delta = FVector(1.0, 0, 0);
 	FQuat rotation = FQuat(1.0, 1.0, 1.0, 1.0);
-	RootComponent->MoveComponent(delta, rotation, false);
+	RootComponent->MoveComponent(Velocity, rotation, false);
 
 }
 

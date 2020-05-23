@@ -10,8 +10,14 @@ UCLASS()
 class SOLARSYSTEM_API ACelestialBody : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
+	UPROPERTY(EditAnywhere, Category = Physics)
+	FVector InitialVelocity;
+
+	UPROPERTY(VisibleAnywhere, Category = Physics)
+    FVector Velocity;
+
 	// Sets default values for this actor's properties
 	ACelestialBody();
 
@@ -19,7 +25,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
