@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "CelestialBody.h"
 #include "CoreMinimal.h"
 #include "Engine/LevelScriptActor.h"
 #include "SolarSystemSimulation.generated.h"
@@ -15,8 +16,17 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public ALevelScriptActor
 	GENERATED_BODY()
 
 	public:
+
+	UPROPERTY(EditAnywhere, Category = Physics)
+    float Gravity;
+
+	UPROPERTY(VisibleAnywhere)
+    TArray<ACelestialBody*> Bodies;
+
     // Called every frame
     virtual void Tick(float DeltaTime) override;
+
+	virtual void BeginPlay() override;
 
 	protected:
 

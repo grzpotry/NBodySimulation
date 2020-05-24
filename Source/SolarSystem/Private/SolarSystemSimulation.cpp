@@ -2,11 +2,31 @@
 
 
 #include "SolarSystemSimulation.h"
+#include "Kismet/GameplayStatics.h"
+#include "CelestialBody.h"
+
 
 // Called every frame
 void ASolarSystemSimulation::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GLog->Log("TODO: Simulate celestial bodies");
+	for (ACelestialBody* body : Bodies)
+	{
+		body->UpdateVelocity(Bodies, Gravity, DeltaTime);
+		body->UpdatePosition();
+	}
+}
+
+void ASolarSystemSimulation::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACelestialBody::StaticClass(), actors);
+
+	for (AActor * Actor : actors)
+	{
+		Bodies.Add(CastChecked<ACelestialBody>(Actor));
+	}
 }

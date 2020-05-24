@@ -15,8 +15,21 @@ public:
 	UPROPERTY(EditAnywhere, Category = Physics)
 	FVector InitialVelocity;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+    class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere, Category = Physics)
+	float Mass;
+
+	UPROPERTY(EditAnywhere, Category = Physics)
+	float DebugArrowLength = 20;
+
 	UPROPERTY(VisibleAnywhere, Category = Physics)
     FVector Velocity;
+
+	void UpdateVelocity(TArray<ACelestialBody*> allBodies, float GravityConst, float DeltaTime);
+
+	void UpdatePosition();
 
 	// Sets default values for this actor's properties
 	ACelestialBody();
