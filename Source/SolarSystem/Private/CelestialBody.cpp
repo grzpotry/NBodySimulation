@@ -3,8 +3,21 @@
 #include "CelestialBody.h"
 #include "DrawDebugHelpers.h"
 
+FKinematicBody ACelestialBody::GetKinematic() const
+{
+	return FKinematicBody(RootComponent->GetComponentLocation(), Velocity, Mass);
+}
+
+void ACelestialBody::DrawDebugVelocityVector() const
+{
+	DrawDebugDirectionalArrow(GetWorld(),
+	                          RootComponent->GetComponentLocation(),
+	                          RootComponent->GetComponentLocation() + Velocity * DebugArrowLength,
+	                          100, FColor::Green, false);
+}
+
 //TODO: draw simulated future orbit
-void ACelestialBody::UpdateVelocity(const TArray<ACelestialBody*> allBodies, const float GravityConst, const float DeltaTime)
+void ACelestialBody::DrawDebugForces(const TArray<ACelestialBody*> allBodies, const float GravityConst)
 {
 	for (ACelestialBody *other : allBodies)
 	{
@@ -21,19 +34,12 @@ void ACelestialBody::UpdateVelocity(const TArray<ACelestialBody*> allBodies, con
 		FVector forceDir = x.GetSafeNormal();
 		FVector force = GravityConst * (Mass * other->Mass) / x.SizeSquared() * forceDir;
 
-		//F = ma
-		FVector acceleration = force / Mass;
-
-		Velocity += acceleration * DeltaTime;
-		DrawDebugDirectionalArrow(GetWorld(), pos1, pos1 + force * DebugArrowLength, 20, FColor::Red);
+		DrawDebugDirectionalArrow(GetWorld(), pos1, pos1 + force * DebugArrowLength, 100, FColor::Red);
 	}
 
-
-	DrawDebugDirectionalArrow(GetWorld(),
-		RootComponent->GetComponentLocation(),
-		RootComponent->GetComponentLocation() + Velocity * DebugArrowLength,
-		20, FColor::Green, false);
+	DrawDebugVelocityVector();
 }
+
 
 void ACelestialBody::UpdatePosition()
 {
