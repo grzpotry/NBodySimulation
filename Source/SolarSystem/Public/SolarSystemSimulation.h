@@ -11,7 +11,7 @@
  *
  */
 UCLASS()
-class SOLARSYSTEM_API ASolarSystemSimulation : public ALevelScriptActor
+class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
 {
 	GENERATED_BODY()
 
@@ -19,6 +19,15 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public ALevelScriptActor
 
 	UPROPERTY(EditAnywhere, Category = Physics)
     float Gravity;
+
+	UPROPERTY(EditAnywhere, Category = Debug)
+	float PathForecastLength;
+
+	UPROPERTY(EditAnywhere, Category = Debug)
+	bool bSimulate = false;
+
+	UPROPERTY(EditAnywhere, Category = Debug, meta=(Description="test desc"))
+	float ForecastSamplePrecisionMultiplier;
 
 	UPROPERTY(VisibleAnywhere)
     TArray<ACelestialBody*> Bodies;
@@ -28,8 +37,14 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public ALevelScriptActor
 
 	virtual void BeginPlay() override;
 
-	protected:
+public:
 
+
+	ASolarSystemSimulation()
+	{
+		PrimaryActorTick.bCanEverTick = true;
+	}
+protected:
     UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
     void DoSomething()
     {

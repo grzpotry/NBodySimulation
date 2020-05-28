@@ -10,9 +10,10 @@ FKinematicBody ACelestialBody::GetKinematic() const
 
 void ACelestialBody::DrawDebugVelocityVector() const
 {
+	FVector pos = GetTransform().GetLocation();
 	DrawDebugDirectionalArrow(GetWorld(),
-	                          RootComponent->GetComponentLocation(),
-	                          RootComponent->GetComponentLocation() + Velocity * DebugArrowLength,
+	                          pos,
+	                          pos + Velocity.GetSafeNormal() * DebugArrowLength,
 	                          100, FColor::Green, false);
 }
 
@@ -34,17 +35,17 @@ void ACelestialBody::DrawDebugForces(const TArray<ACelestialBody*> allBodies, co
 		FVector forceDir = x.GetSafeNormal();
 		FVector force = GravityConst * (Mass * other->Mass) / x.SizeSquared() * forceDir;
 
-		DrawDebugDirectionalArrow(GetWorld(), pos1, pos1 + force * DebugArrowLength, 100, FColor::Red);
+		DrawDebugDirectionalArrow(GetWorld(), pos1, pos1 + force.GetSafeNormal() * DebugArrowLength, 100, FColor::Red);
 	}
 
 	DrawDebugVelocityVector();
 }
 
 
-void ACelestialBody::UpdatePosition()
+void ACelestialBody::UpdatePosition(float DeltaTime)
 {
 	FQuat rotation = FQuat(1.0, 1.0, 1.0, 1.0);
-	RootComponent->MoveComponent(Velocity, rotation, false);
+	RootComponent->MoveComponent(Velocity * DeltaTime, rotation, false);
 }
 
 // Sets default values

@@ -78,7 +78,7 @@ public:
 	void DrawDebugVelocityVector() const;
 	void DrawDebugForces(TArray<ACelestialBody*> allBodies, float GravityConst);
 
-	void UpdatePosition();
+	void UpdatePosition(float DeltaTime);
 
 	// Sets default values for this actor's properties
 	ACelestialBody();

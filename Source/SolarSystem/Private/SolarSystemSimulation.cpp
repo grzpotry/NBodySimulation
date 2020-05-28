@@ -6,7 +6,6 @@
 #include "CelestialBody.h"
 #include "DrawDebugHelpers.h"
 
-
 // Called every frame
 void ASolarSystemSimulation::Tick(float DeltaTime)
 {
@@ -20,35 +19,36 @@ void ASolarSystemSimulation::Tick(float DeltaTime)
 		kinematicBodies.Add(b);
 	}
 
-	for (ACelestialBody* body : Bodies)
+	if (bSimulate)
 	{
-		body->Velocity = body->GetKinematic().CalculateVelocity(kinematicBodies, Gravity, DeltaTime);
-		//body->DrawDebugForces(Bodies, Gravity);
+		for (ACelestialBody* body : Bodies)
+		{
+			body->Velocity = body->GetKinematic().CalculateVelocity(kinematicBodies, Gravity, DeltaTime);
+			body->DrawDebugForces(Bodies, Gravity);
+		}
+
+		for (ACelestialBody* body : Bodies)
+		{
+			body->UpdatePosition(DeltaTime);
+		}
 	}
 
-	for (ACelestialBody* body : Bodies)
-	{
-		body->UpdatePosition();
-	}
-
-	float sample = 0.01;
-	float simulationSec = 10;
+	float sample = 1 / ForecastSamplePrecisionMultiplier;
 
 	// FVector startPos = kinematicBodies[0]->Position;
 	// GLog->Log("BEFORE SIMULATION "  + kinematicBodies[0]->Position.ToString());
 
-	for(float i = 0; i < simulationSec; i+=sample)
+	for(float i = 0; i < PathForecastLength; i+=sample)
 	{
 		for (int index =0; index < kinematicBodies.Num(); index ++)
 		{
 			FVector newVelocity = kinematicBodies[index].CalculateVelocity(kinematicBodies, Gravity, sample);
-			FVector newPosition = kinematicBodies[index].Position + newVelocity;
+			FVector newPosition = kinematicBodies[index].Position + newVelocity * sample;
 
 			kinematicBodies[index].Position = newPosition;
 			kinematicBodies[index].Velocity = newVelocity;
 
 			//TODO: optional args?
-
 
 			DrawDebugPoint(GetWorld(), newPosition, 1000, FColor::Red, false);
 			//GLog->Log(kinematicBodies[index].Position.ToString());
