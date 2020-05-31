@@ -73,6 +73,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Physics)
 	float DebugArrowLength = 20;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<FVector> PredictedTrajectory;
+
 	FKinematicBody GetKinematic() const;
 
 	void DrawDebugVelocityVector() const;

@@ -32,6 +32,8 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
 	UPROPERTY(VisibleAnywhere)
     TArray<ACelestialBody*> Bodies;
 
+	void DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const;
+
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 

@@ -6,7 +6,36 @@
 #include "CelestialBody.h"
 #include "DrawDebugHelpers.h"
 
-// Called every frame
+void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const
+{
+	float sample = 1 / ForecastSamplePrecisionMultiplier;
+
+	int pointsCount  = ceil(PathForecastLength / sample);
+
+	for (ACelestialBody* body : Bodies)
+	{
+		body->PredictedTrajectory.SetNum(pointsCount);
+	}
+
+	//TODO: clean this up
+	int pointIndex = 0;
+	for(float i = 0; i < PathForecastLength; i+=sample, pointIndex++)
+	{
+		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
+		{
+			FVector newVelocity = kinematicBodies[bodyIndex].CalculateVelocity(kinematicBodies, Gravity, sample);
+			FVector newPosition = kinematicBodies[bodyIndex].Position + newVelocity * sample;
+
+			Bodies[bodyIndex]->PredictedTrajectory[pointIndex] = newPosition;
+
+			kinematicBodies[bodyIndex].Position = newPosition;
+			kinematicBodies[bodyIndex].Velocity = newVelocity;
+
+			//DrawDebugPoint(GetWorld(), newPosition, 1000, FColor::Red, false);
+		}
+	}
+}
+
 void ASolarSystemSimulation::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -33,30 +62,7 @@ void ASolarSystemSimulation::Tick(float DeltaTime)
 		}
 	}
 
-	float sample = 1 / ForecastSamplePrecisionMultiplier;
-
-	// FVector startPos = kinematicBodies[0]->Position;
-	// GLog->Log("BEFORE SIMULATION "  + kinematicBodies[0]->Position.ToString());
-
-	for(float i = 0; i < PathForecastLength; i+=sample)
-	{
-		for (int index =0; index < kinematicBodies.Num(); index ++)
-		{
-			FVector newVelocity = kinematicBodies[index].CalculateVelocity(kinematicBodies, Gravity, sample);
-			FVector newPosition = kinematicBodies[index].Position + newVelocity * sample;
-
-			kinematicBodies[index].Position = newPosition;
-			kinematicBodies[index].Velocity = newVelocity;
-
-			//TODO: optional args?
-
-			DrawDebugPoint(GetWorld(), newPosition, 1000, FColor::Red, false);
-			//GLog->Log(kinematicBodies[index].Position.ToString());
-		}
-	}
-
-	// DrawDebugDirectionalArrow(GetWorld(), startPos, kinematicBodies[0]->Position, 100, FColor::Blue);
-	// GLog->Log("AFTER SIMULATION " + kinematicBodies[0]->Position.ToString());
+	DrawTrajectories(kinematicBodies);
 }
 
 void ASolarSystemSimulation::BeginPlay()
