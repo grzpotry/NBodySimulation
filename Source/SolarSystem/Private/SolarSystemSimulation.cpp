@@ -4,7 +4,6 @@
 #include "SolarSystemSimulation.h"
 #include "Kismet/GameplayStatics.h"
 #include "CelestialBody.h"
-#include "DrawDebugHelpers.h"
 
 void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const
 {
@@ -30,8 +29,6 @@ void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBo
 
 			kinematicBodies[bodyIndex].Position = newPosition;
 			kinematicBodies[bodyIndex].Velocity = newVelocity;
-
-			//DrawDebugPoint(GetWorld(), newPosition, 1000, FColor::Red, false);
 		}
 	}
 }
