@@ -40,8 +40,6 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
 	virtual void BeginPlay() override;
 
 public:
-
-
 	ASolarSystemSimulation()
 	{
 		PrimaryActorTick.bCanEverTick = true;
