@@ -6,28 +6,55 @@
 
 void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const
 {
-	float sample = 1 / ForecastSamplePrecisionMultiplier;
 
-	int pointsCount  = ceil(PathForecastLength / sample);
+	int pointsCount  = ceil(PathForecastLength / TrajectorySamplingMultiplier);
+	TArray<FVector> initialPositions;
+	initialPositions.SetNum(kinematicBodies.Num());
 
 	for (ACelestialBody* body : Bodies)
 	{
-		body->PredictedTrajectory.SetNum(pointsCount);
+		body->PredictedTrajectory.SetNum(pointsCount + 1);
+		body->PredictedTrajectory[0] = body->GetRootComponent()->GetComponentLocation();
 	}
 
 	//TODO: clean this up
-	int pointIndex = 0;
-	for(float i = 0; i < PathForecastLength; i+=sample, pointIndex++)
+	int pointIndex = 1;
+	for(float i = 0; i < PathForecastLength; i+=TrajectorySamplingMultiplier, pointIndex++)
 	{
+		TArray<FVector> positions;
+		TArray<FVector> velocities;
+
+		positions.SetNum(kinematicBodies.Num());
+		velocities.SetNum(kinematicBodies.Num());
+
+		//calc positions
 		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
 		{
-			FVector newVelocity = kinematicBodies[bodyIndex].CalculateVelocity(kinematicBodies, Gravity, sample);
-			FVector newPosition = kinematicBodies[bodyIndex].Position + newVelocity * sample;
+			FVector newVelocity = kinematicBodies[bodyIndex].CalculateVelocity(MassMultiplier, kinematicBodies, Gravity, TrajectorySamplingMultiplier);
+			FVector newPosition = kinematicBodies[bodyIndex].Position + newVelocity * TrajectorySamplingMultiplier;
+
+			velocities[bodyIndex] = newVelocity;
+			positions[bodyIndex] = newPosition;
+		}
+
+
+		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
+		{
+			//eg. earth for moon
+			ACelestialBody * centralBody = Bodies[bodyIndex]->CentralBody;
+			FVector newPosition = positions[bodyIndex];
+
+			// TODO: Fix calculating trajectory relative to central body
+			// if (centralBody != nullptr && pointIndex > 0)
+			// {
+			// 	int centralBodyIndex = Bodies.Find(centralBody);
+			// 	FVector centralBodyMoveDeltaMove = Bodies[centralBodyIndex]->PredictedTrajectory[0] - Bodies[bodyIndex]->PredictedTrajectory[0];//Bodies[centralBodyIndex]->PredictedTrajectory[pointIndex - 1];
+			// 	newPosition -= centralBodyMoveDeltaMove;
+			// }
 
 			Bodies[bodyIndex]->PredictedTrajectory[pointIndex] = newPosition;
-
 			kinematicBodies[bodyIndex].Position = newPosition;
-			kinematicBodies[bodyIndex].Velocity = newVelocity;
+			kinematicBodies[bodyIndex].Velocity = velocities[bodyIndex];
 		}
 	}
 }
@@ -48,7 +75,7 @@ void ASolarSystemSimulation::Tick(float DeltaTime)
 	{
 		for (ACelestialBody* body : Bodies)
 		{
-			body->Velocity = body->GetKinematic().CalculateVelocity(kinematicBodies, Gravity, DeltaTime);
+			body->Velocity = body->GetKinematic().CalculateVelocity(MassMultiplier, kinematicBodies, Gravity, DeltaTime);
 			body->DrawDebugForces(Bodies, Gravity);
 		}
 

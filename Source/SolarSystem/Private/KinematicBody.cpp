@@ -8,7 +8,7 @@ FKinematicBody::FKinematicBody(const FVector& position_, const FVector& velocity
 {
 }
 
-FVector FKinematicBody::CalculateVelocity(TArray<FKinematicBody> otherBodies, float GravityConst, float DeltaTime) const
+FVector FKinematicBody::CalculateVelocity(float massMultiplier, TArray<FKinematicBody> otherBodies, float GravityConst, float DeltaTime) const
 {
 	FVector newVelocity = Velocity;
 
@@ -24,7 +24,7 @@ FVector FKinematicBody::CalculateVelocity(TArray<FKinematicBody> otherBodies, fl
 		}
 
 		FVector forceDir = x.GetSafeNormal();
-		FVector force = GravityConst * (Mass * other.Mass) / x.SizeSquared() * forceDir;
+		FVector force = GravityConst * (massMultiplier * Mass * other.Mass) / x.SizeSquared() * forceDir;
 
 		//F = ma
 		FVector acceleration = force / Mass;

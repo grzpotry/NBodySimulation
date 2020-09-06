@@ -17,24 +17,26 @@ public:
 	UPROPERTY(EditAnywhere, Category = Physics)
 	FVector InitialVelocity;
 
-	//just proof of concept - calculate initial params for moon orbit
-	UPROPERTY(EditAnywhere, Category = Physics)
-    bool CalculateInitialVelocityAndPosition;
-
-	UPROPERTY(EditAnywhere, Category = Physics)
-	float InitialVelocityMagnitude;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     class UStaticMeshComponent* Mesh;
 
-	UPROPERTY(EditAnywhere, Category = Physics)
-	float Mass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Physics)
+	float Radius;
 
 	UPROPERTY(VisibleAnywhere, Category = Physics)
+	float Mass;
+
+	UPROPERTY(EditAnywhere, Category = Physics)
+	float SurfaceGravity;
+
+	UPROPERTY(EditAnywhere, Category = Physics)
 	FVector Velocity;
 
 	UPROPERTY(EditAnywhere, Category = Physics)
 	float DebugArrowLength = 20;
+
+	UPROPERTY(EditInstanceOnly, Category = Physics)
+	ACelestialBody* CentralBody;
 
 	UPROPERTY(BlueprintReadOnly)
 	TArray<FVector> PredictedTrajectory;

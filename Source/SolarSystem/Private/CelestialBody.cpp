@@ -60,25 +60,6 @@ ACelestialBody::ACelestialBody()
 void ACelestialBody::BeginPlay()
 {
 	Super::BeginPlay();
-
-	//WIP PROTOTYPE - INITIAL POSITIONING FOR ORBITAL BODIES
-	if (CalculateInitialVelocityAndPosition)
-	{
-		int r = 3840; //promien orbity
-
-		float v = InitialVelocityMagnitude;//sqrt(G * M) / r; - orbital velocity magnitude
-
-		//initial position (sample position on circle)
-		double posX = r * cos(0);
-		double posY = r * sin(0);
-
-		double velX = -v * sin(0); //v * cos(fi) + pi/2
-		double velY = v * cos(0);  //v * sin(fi) + pi/2
-
-		RootComponent->SetWorldLocation(FVector(posX, posY, 0));
-		InitialVelocity = FVector(velX, velY, 0);
-	}
-
 	Velocity = InitialVelocity;
 }
 
@@ -86,5 +67,7 @@ void ACelestialBody::BeginPlay()
 void ACelestialBody::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	Mass = SurfaceGravity * Radius * Radius; //gravityConst
 }
 

@@ -24,10 +24,13 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
 	float PathForecastLength;
 
 	UPROPERTY(EditAnywhere, Category = Debug)
+	float MassMultiplier;
+
+	UPROPERTY(EditAnywhere, Category = Debug)
 	bool bSimulate = false;
 
 	UPROPERTY(EditAnywhere, Category = Debug, meta=(Description="test desc"))
-	float ForecastSamplePrecisionMultiplier;
+	float TrajectorySamplingMultiplier;
 
 	UPROPERTY(VisibleAnywhere)
     TArray<ACelestialBody*> Bodies;

@@ -16,6 +16,6 @@ struct FKinematicBody
 
     FKinematicBody(const FVector& position_, const FVector& velocity_, const float mass_);
 
-    FVector CalculateVelocity(TArray<FKinematicBody> otherBodies, float GravityConst, float DeltaTime) const;
+    FVector CalculateVelocity(float massMultiplier, TArray<FKinematicBody> otherBodies, float GravityConst, float DeltaTime) const;
 };
 
