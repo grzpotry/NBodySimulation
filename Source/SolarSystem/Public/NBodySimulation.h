@@ -5,13 +5,13 @@
 #include "CelestialBody.h"
 #include "CoreMinimal.h"
 #include "Engine/LevelScriptActor.h"
-#include "SolarSystemSimulation.generated.h"
+#include "NBodySimulation.generated.h"
 
 /**
  *
  */
 UCLASS()
-class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
+class SOLARSYSTEM_API ANBodySimulation : public AActor
 {
 	GENERATED_BODY()
 
@@ -29,8 +29,14 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
 	UPROPERTY(EditAnywhere, Category = Debug)
 	bool bSimulate = false;
 
+	UPROPERTY(EditAnywhere, Category = Debug)
+	bool EnableCentralBodyOffset = true;
+
 	UPROPERTY(EditAnywhere, Category = Debug, meta=(Description="test desc"))
 	float TrajectorySamplingMultiplier;
+
+	UPROPERTY(EditAnywhere, Category = Physics)
+	ACelestialBody * CentralBody;
 
 	UPROPERTY(VisibleAnywhere)
     TArray<ACelestialBody*> Bodies;
@@ -43,7 +49,7 @@ class SOLARSYSTEM_API ASolarSystemSimulation : public AActor
 	virtual void BeginPlay() override;
 
 public:
-	ASolarSystemSimulation()
+	ANBodySimulation()
 	{
 		PrimaryActorTick.bCanEverTick = true;
 	}

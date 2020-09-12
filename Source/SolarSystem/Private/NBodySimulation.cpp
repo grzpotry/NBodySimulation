@@ -1,23 +1,31 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "SolarSystemSimulation.h"
 #include "Kismet/GameplayStatics.h"
 #include "CelestialBody.h"
+#include "NBodySimulation.h"
 
-void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const
+void ANBodySimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const
 {
 
 	int pointsCount  = ceil(PathForecastLength / TrajectorySamplingMultiplier);
-	TArray<FVector> initialPositions;
-	initialPositions.SetNum(kinematicBodies.Num());
 
+
+
+	FVector centralBodyInitPosition;
 	for (ACelestialBody* body : Bodies)
 	{
 		body->PredictedTrajectory.SetNum(pointsCount + 1);
 		body->PredictedTrajectory[0] = body->GetRootComponent()->GetComponentLocation();
+
+		if (body == CentralBody)
+		{
+			centralBodyInitPosition = body->GetKinematic().Position;
+		}
 	}
 
-	//TODO: clean this up
+
+
+	//simulation
 	int pointIndex = 1;
 	for(float i = 0; i < PathForecastLength; i+=TrajectorySamplingMultiplier, pointIndex++)
 	{
@@ -27,7 +35,9 @@ void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBo
 		positions.SetNum(kinematicBodies.Num());
 		velocities.SetNum(kinematicBodies.Num());
 
-		//calc positions
+		FVector centralBodyPositionDelta;
+
+		//calc positions and velocities
 		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
 		{
 			FVector newVelocity = kinematicBodies[bodyIndex].CalculateVelocity(MassMultiplier, kinematicBodies, Gravity, TrajectorySamplingMultiplier);
@@ -35,22 +45,30 @@ void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBo
 
 			velocities[bodyIndex] = newVelocity;
 			positions[bodyIndex] = newPosition;
+
+			if (CentralBody != nullptr && Bodies[bodyIndex] == CentralBody)
+			{
+				centralBodyPositionDelta = newPosition - centralBodyInitPosition;
+			}
 		}
 
 
 		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
 		{
-			//eg. earth for moon
-			ACelestialBody * centralBody = Bodies[bodyIndex]->CentralBody;
 			FVector newPosition = positions[bodyIndex];
 
-			// TODO: Fix calculating trajectory relative to central body
-			// if (centralBody != nullptr && pointIndex > 0)
-			// {
-			// 	int centralBodyIndex = Bodies.Find(centralBody);
-			// 	FVector centralBodyMoveDeltaMove = Bodies[centralBodyIndex]->PredictedTrajectory[0] - Bodies[bodyIndex]->PredictedTrajectory[0];//Bodies[centralBodyIndex]->PredictedTrajectory[pointIndex - 1];
-			// 	newPosition -= centralBodyMoveDeltaMove;
-			// }
+			//przesuwamy kazde cialo o wartosc przesuniecia ciala centralnego
+			if (CentralBody != nullptr)
+			{
+				if (Bodies[bodyIndex] != CentralBody)
+				{
+					newPosition -= centralBodyPositionDelta;
+				}
+				else
+				{
+					newPosition = centralBodyInitPosition;
+				}
+			}
 
 			Bodies[bodyIndex]->PredictedTrajectory[pointIndex] = newPosition;
 			kinematicBodies[bodyIndex].Position = newPosition;
@@ -59,7 +77,7 @@ void ASolarSystemSimulation::DrawTrajectories(TArray<FKinematicBody> kinematicBo
 	}
 }
 
-void ASolarSystemSimulation::Tick(float DeltaTime)
+void ANBodySimulation::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
@@ -88,7 +106,7 @@ void ASolarSystemSimulation::Tick(float DeltaTime)
 	DrawTrajectories(kinematicBodies);
 }
 
-void ASolarSystemSimulation::BeginPlay()
+void ANBodySimulation::BeginPlay()
 {
 	Super::BeginPlay();
 
