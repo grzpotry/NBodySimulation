@@ -110,6 +110,8 @@ void ANBodySimulation::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Bodies.Empty();
+
 	TArray<AActor*> actors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACelestialBody::StaticClass(), actors);
 

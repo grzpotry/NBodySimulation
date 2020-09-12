@@ -38,7 +38,7 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	UPROPERTY(EditInstanceOnly, Category = Physics)
 	ACelestialBody * CentralBody;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
     TArray<ACelestialBody*> Bodies;
 
 	void DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const;
