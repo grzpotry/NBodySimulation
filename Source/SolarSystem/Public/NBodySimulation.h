@@ -35,7 +35,7 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	UPROPERTY(EditAnywhere, Category = Debug, meta=(Description="test desc"))
 	float TrajectorySamplingMultiplier;
 
-	UPROPERTY(EditAnywhere, Category = Physics)
+	UPROPERTY(EditInstanceOnly, Category = Physics)
 	ACelestialBody * CentralBody;
 
 	UPROPERTY(VisibleAnywhere)
