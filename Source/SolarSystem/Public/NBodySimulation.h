@@ -30,10 +30,13 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	bool bSimulate = false;
 
 	UPROPERTY(EditAnywhere, Category = Debug)
-	bool EnableCentralBodyOffset = true;
+	bool bDrawOrbits = true;
+
+	UPROPERTY(EditAnywhere, Category = Debug)
+	float SpeedFactor = 1.0;
 
 	UPROPERTY(EditAnywhere, Category = Debug, meta=(Description="test desc"))
-	float TrajectorySamplingMultiplier;
+	float OrbitSamplingMultiplier;
 
 	UPROPERTY(EditInstanceOnly, Category = Physics)
 	ACelestialBody * CentralBody;
@@ -41,7 +44,7 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	UPROPERTY(EditAnywhere)
     TArray<ACelestialBody*> Bodies;
 
-	void DrawTrajectories(TArray<FKinematicBody> kinematicBodies) const;
+	void CalculateOrbits(TArray<FKinematicBody> kinematicBodies) const;
 
     // Called every frame
     virtual void Tick(float DeltaTime) override;

@@ -26,6 +26,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Physics)
 	float Mass;
 
+	UPROPERTY(BlueprintReadOnly, Category = Physics)
+	bool bDrawOrbit = false;
+
 	UPROPERTY(EditAnywhere, Category = Physics)
 	float SurfaceGravity;
 
@@ -39,7 +42,7 @@ public:
 	ACelestialBody* CentralBody;
 
 	UPROPERTY(BlueprintReadOnly)
-	TArray<FVector> PredictedTrajectory;
+	TArray<FVector> PredictedOrbit;
 
 	FKinematicBody GetKinematic() const;
 
