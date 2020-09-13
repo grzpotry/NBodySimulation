@@ -26,7 +26,7 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Physics)
 	float Mass;
 
-	UPROPERTY(BlueprintReadOnly, Category = Physics)
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = Physics)
 	bool bDrawOrbit = false;
 
 	UPROPERTY(EditAnywhere, Category = Physics)
