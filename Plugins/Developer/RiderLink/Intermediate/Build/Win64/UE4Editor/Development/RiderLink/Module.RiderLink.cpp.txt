@@ -1,6 +1,14 @@
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UE4Editor\Development\RiderLink\Definitions.RiderLink.h
 C:/Projects/Unreal/SolarSystem/Plugins/Developer/RiderLink/Source/RiderLink/Private/BlueprintProvider.cpp
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RiderLink\Private\BlueprintProvider.h
+C:\UnrealEngine\Engine\Source\Runtime\MessagingCommon\Public\MessageEndpoint.h
+C:\UnrealEngine\Engine\Source\Runtime\Core\Public\Containers/ArrayBuilder.h
+C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessageAttachment.h
+C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessageBus.h
+C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessageHandler.h
+C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessageReceiver.h
+C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessageSender.h
+C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessageBusListener.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\Toolkits/AssetEditorManager.h
 C:\UnrealEngine\Engine\Source\Editor\Kismet\Public\BlueprintEditor.h
 C:\UnrealEngine\Engine\Source\Editor\Kismet\Public\WorkflowOrientedApp/WorkflowTabFactory.h
@@ -8,6 +16,8 @@ C:\UnrealEngine\Engine\Source\Editor\Kismet\Public\WorkflowOrientedApp/WorkflowT
 C:\UnrealEngine\Engine\Source\Editor\Kismet\Public\BlueprintEditorModule.h
 C:\UnrealEngine\Engine\Source\Editor\Kismet\Public\WorkflowOrientedApp/WorkflowCentricApplication.h
 C:\UnrealEngine\Engine\Source\Developer/Merge/Public/Merge.h
+C:\UnrealEngine\Engine\Source\Editor\UnrealEdMessages\Classes\AssetEditorMessages.h
+C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEdMessages\AssetEditorMessages.generated.h
 C:\UnrealEngine\Engine\Source\Runtime\MessagingCommon\Public\MessageEndpointBuilder.h
 C:\UnrealEngine\Engine\Source\Runtime\Messaging\Public\IMessagingModule.h
 C:\UnrealEngine\Engine\Source\Runtime\MessagingCommon\Public\MessageHandlers.h
@@ -20,10 +30,46 @@ C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\impl/RName.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\thirdparty.hpp
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\tsl/ordered_set.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cstdint
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\deque
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xmemory
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\limits
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cfloat
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\climits
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cwchar
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cstdio
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xutility
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cstring
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\utility
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\functional
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\tuple
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\memory
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\iosfwd
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\vector
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\tsl\ordered_hash.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\algorithm
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cmath
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\iterator
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\istream
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\ostream
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\ios
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xlocnum
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\streambuf
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xiosbase
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\share.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\system_error
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cerrno
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\stdexcept
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xstring
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xcall_once.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xerrc.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xlocale
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xfacet
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xlocinfo
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xlocinfo.h
+C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\locale.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\tsl/ordered_map.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\optional\tl\optional.hpp
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\mpark/variant.hpp
@@ -59,7 +105,6 @@ C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\math.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\vcruntime_startup.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xthreads.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\sstream
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\atomic
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\future
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\condition_variable
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\mutex
@@ -72,6 +117,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_core_cpp\types/wrapper.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_core_cpp\util/core_traits.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_core_cpp\types/Void.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\iostream
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt\assert.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_core_cpp\std/list.h
@@ -83,6 +129,10 @@ C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\serialization\DefaultAbstractDeclaration.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_core_cpp\std/unordered_map.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\unordered_map
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xhash
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\list
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\xbit_ops.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\unordered_set
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\scheduler/base/IScheduler.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_core_cpp\logger/Logger.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\cstdarg
@@ -226,6 +276,7 @@ C:\UnrealEngine\Engine\Source\Runtime\Core\Public\Windows/HideWindowsPlatformTyp
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\wire\SocketWire.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\base/WireBase.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\protocol/MessageBroker.h
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\INCLUDE\queue
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\wire\ByteBufferAsyncProcessor.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\wire\PkgInputStream.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\thirdparty\clsocket\src\SimpleSocket.h
@@ -289,9 +340,11 @@ C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RD\include\rd_framework_cpp\scheduler\base/SingleThreadSchedulerBase.h
 C:\UnrealEngine\Engine\Source\Runtime\Core\Public\Windows/AllowWindowsPlatformTypes.h
 C:\UnrealEngine\Engine\Source\Runtime\AssetRegistry\Public\AssetRegistryModule.h
+C:\UnrealEngine\Engine\Source\Runtime\AssetRegistry\Public\AssetRegistry/AssetRegistryModule.h
+C:\UnrealEngine\Engine\Source\Runtime\AssetRegistry\Public\AssetRegistry/IAssetRegistry.h
 C:\UnrealEngine\Engine\Source\Runtime\CoreUObject\Public\Misc/AssetRegistryInterface.h
-C:\UnrealEngine\Engine\Source\Runtime\AssetRegistry\Public\IAssetRegistry.h
 C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AssetRegistry\IAssetRegistry.generated.h
+C:\UnrealEngine\Engine\Source\Runtime\AssetRegistry\Public\IAssetRegistry.h
 C:\Projects\Unreal\SolarSystem\Plugins\Developer\RiderLink\Source\RiderLink\Private\RdEditorProtocol/UE4Library/UE4Library.h
 C:\UnrealEngine\Engine\Source\Runtime\Core\Public\Windows/HideWindowsPlatformTypes.h
 C:/Projects/Unreal/SolarSystem/Plugins/Developer/RiderLink/Source/RiderLink/Private/RdEditorProtocol/instantiations.cpp
@@ -345,21 +398,24 @@ C:\UnrealEngine\Engine\Source\Developer\SourceControl\Public\ISourceControlOpera
 C:\UnrealEngine\Engine\Source\Developer\SourceControl\Public\ISourceControlState.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\IDDCNotifications.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\ComponentVisualizer.h
+C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\ComponentVisualizer.generated.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\ComponentVisualizerManager.h
 C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd\UnrealEdEngine.generated.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\Kismet2/DebuggerCommands.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\UnrealEdGlobals.h
 C:\UnrealEngine\Engine\Source\Editor\UnrealEd\Public\IAssetViewport.h
 C:\UnrealEngine\Engine\Source\Runtime\Slate\Public\Widgets/SViewport.h
-C:\UnrealEngine\Engine\Source\Runtime\SlateCore\Public\Input/HittestGrid.h
 C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\IHeadMountedDisplay.h
 C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\HeadMountedDisplayTypes.h
+C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\IMotionController.h
 C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HeadMountedDisplay\HeadMountedDisplayTypes.generated.h
 C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\LateUpdateManager.h
 C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\IXRTrackingSystem.h
 C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\IIdentifiableXRDevice.h
 C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HeadMountedDisplay\IIdentifiableXRDevice.generated.h
 C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\IXRInput.h
+C:\UnrealEngine\Engine\Source\Runtime\HeadMountedDisplay\Public\XRGestureConfig.h
+C:\UnrealEngine\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HeadMountedDisplay\XRGestureConfig.generated.h
 C:\UnrealEngine\Engine\Source\Editor\LevelEditor\Public\LevelEditor.h
 C:\UnrealEngine\Engine\Source\Editor\LevelEditor\Public\ILevelEditor.h
 C:\UnrealEngine\Engine\Source\Editor\LevelEditor\Public\ViewportTypeDefinition.h

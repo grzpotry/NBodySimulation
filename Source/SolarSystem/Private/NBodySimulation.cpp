@@ -4,71 +4,17 @@
 #include "CelestialBody.h"
 #include "NBodySimulation.h"
 
-void ANBodySimulation::CalculateOrbits(TArray<FKinematicBody> kinematicBodies) const
+void ANBodySimulation::BeginPlay()
 {
-	int pointsCount  = ceil(PathForecastLength / OrbitSamplingMultiplier);
+	Super::BeginPlay();
 
-	FVector centralBodyInitPosition;
-	for (ACelestialBody* body : Bodies)
+	Bodies.Empty();
+	TArray<AActor*> actors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACelestialBody::StaticClass(), actors);
+
+	for (AActor* Actor : actors)
 	{
-		body->PredictedOrbit.SetNum(pointsCount + 1);
-		body->PredictedOrbit[0] = body->GetRootComponent()->GetComponentLocation();
-
-		if (body == CentralBody)
-		{
-			centralBodyInitPosition = body->GetKinematic().Position;
-		}
-	}
-
-	//simulation
-	int pointIndex = 1;
-	for(float i = 0; i < PathForecastLength; i+=OrbitSamplingMultiplier, pointIndex++)
-	{
-		TArray<FVector> positions;
-		TArray<FVector> velocities;
-
-		positions.SetNum(kinematicBodies.Num());
-		velocities.SetNum(kinematicBodies.Num());
-
-		FVector centralBodyPositionDelta;
-
-		//calc positions and velocities
-		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
-		{
-			FVector newVelocity = kinematicBodies[bodyIndex].CalculateVelocity(MassMultiplier, kinematicBodies, Gravity, OrbitSamplingMultiplier);
-			FVector newPosition = kinematicBodies[bodyIndex].Position + newVelocity * OrbitSamplingMultiplier;
-
-			velocities[bodyIndex] = newVelocity;
-			positions[bodyIndex] = newPosition;
-
-			if (CentralBody != nullptr && Bodies[bodyIndex] == CentralBody)
-			{
-				centralBodyPositionDelta = newPosition - centralBodyInitPosition;
-			}
-		}
-
-
-		for (int bodyIndex =0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
-		{
-			FVector newPosition = positions[bodyIndex];
-
-			//przesuwamy kazde cialo o wartosc przesuniecia ciala centralnego
-			if (CentralBody != nullptr)
-			{
-				if (Bodies[bodyIndex] != CentralBody)
-				{
-					newPosition -= centralBodyPositionDelta;
-				}
-				else
-				{
-					newPosition = centralBodyInitPosition;
-				}
-			}
-
-			Bodies[bodyIndex]->PredictedOrbit[pointIndex] = newPosition;
-			kinematicBodies[bodyIndex].Position = newPosition;
-			kinematicBodies[bodyIndex].Velocity = velocities[bodyIndex];
-		}
+		Bodies.Add(CastChecked<ACelestialBody>(Actor));
 	}
 }
 
@@ -89,7 +35,7 @@ void ANBodySimulation::Tick(float DeltaTime)
 	{
 		for (ACelestialBody* body : Bodies)
 		{
-			body->Velocity = body->GetKinematic().CalculateVelocity(MassMultiplier, kinematicBodies, Gravity, DeltaTime * SpeedFactor);
+			body->Velocity = body->GetKinematic().CalculateVelocity(MassMultiplier, kinematicBodies, Gravity,DeltaTime * SpeedFactor);
 			body->DrawDebugForces(Bodies, Gravity);
 		}
 
@@ -99,20 +45,78 @@ void ANBodySimulation::Tick(float DeltaTime)
 		}
 	}
 
-	CalculateOrbits(kinematicBodies);
+	UpdatePredictedOrbits(kinematicBodies);
 }
 
-void ANBodySimulation::BeginPlay()
+void ANBodySimulation::UpdatePredictedOrbits(TArray<FKinematicBody>& kinematicBodies)
 {
-	Super::BeginPlay();
+	int pointsCount = ceil(OrbitForecastLength / OrbitSamplingMultiplier);
 
-	Bodies.Empty();
-
-	TArray<AActor*> actors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACelestialBody::StaticClass(), actors);
-
-	for (AActor * Actor : actors)
+	FVector centralBodyInitPosition;
+	for (ACelestialBody* body : Bodies)
 	{
-		Bodies.Add(CastChecked<ACelestialBody>(Actor));
+		body->PredictedOrbit.SetNum(pointsCount + 1);
+		body->PredictedOrbit[0] = body->GetRootComponent()->GetComponentLocation();
+
+		if (body == CentralBody)
+		{
+			centralBodyInitPosition = body->GetKinematic().Position;
+		}
+	}
+
+	int stepIndex = 1;
+	for (float i = 0; i < OrbitForecastLength; i += OrbitSamplingMultiplier, stepIndex++)
+	{
+		UpdatePredictedOrbitsStep(kinematicBodies, centralBodyInitPosition, stepIndex);
+	}
+}
+
+void ANBodySimulation::UpdatePredictedOrbitsStep(TArray<FKinematicBody>& kinematicBodies, FVector centralBodyInitPosition, int stepIndex)
+{
+	TArray<FVector> positions;
+	TArray<FVector> velocities;
+
+	positions.SetNum(kinematicBodies.Num());
+	velocities.SetNum(kinematicBodies.Num());
+
+	FVector centralBodyPositionDelta;
+
+	//calc positions and velocities
+	for (int bodyIndex = 0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
+	{
+		FVector newVelocity = kinematicBodies[bodyIndex].CalculateVelocity(MassMultiplier, kinematicBodies, Gravity, OrbitSamplingMultiplier);
+		FVector newPosition = kinematicBodies[bodyIndex].Position + newVelocity * OrbitSamplingMultiplier;
+
+		velocities[bodyIndex] = newVelocity;
+		positions[bodyIndex] = newPosition;
+
+		if (CentralBody != nullptr && Bodies[bodyIndex] == CentralBody)
+		{
+			centralBodyPositionDelta = newPosition - centralBodyInitPosition;
+		}
+	}
+
+	//update positions and velocities
+	for (int bodyIndex = 0; bodyIndex < kinematicBodies.Num(); bodyIndex ++)
+	{
+		FVector newPosition = positions[bodyIndex];
+
+		//Update position of each body by CentralBody move offset - (so we can draw all orbits in relation to one particular body)
+		if (CentralBody != nullptr)
+		{
+			if (Bodies[bodyIndex] != CentralBody)
+			{
+				newPosition -= centralBodyPositionDelta;
+			}
+			else
+			{
+				newPosition = centralBodyInitPosition;
+			}
+		}
+
+
+		Bodies[bodyIndex]->PredictedOrbit[stepIndex] = newPosition;
+		kinematicBodies[bodyIndex].Position = newPosition;
+		kinematicBodies[bodyIndex].Velocity = velocities[bodyIndex];
 	}
 }

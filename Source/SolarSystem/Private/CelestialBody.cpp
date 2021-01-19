@@ -3,6 +3,34 @@
 #include "CelestialBody.h"
 #include "DrawDebugHelpers.h"
 
+// Sets default values
+ACelestialBody::ACelestialBody()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+}
+
+// Called when the game starts or when spawned
+void ACelestialBody::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Velocity = InitialVelocity;
+}
+
+// Called every frame
+void ACelestialBody::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	Mass = SurfaceGravity * Radius * Radius; //gravityConst
+}
+
+void ACelestialBody::UpdatePosition(float DeltaTime) const
+{
+	FQuat rotation = FQuat(1.0, 1.0, 1.0, 1.0);
+	RootComponent->MoveComponent(Velocity * DeltaTime, rotation, false);
+}
+
 FKinematicBody ACelestialBody::GetKinematic() const
 {
 	return FKinematicBody(RootComponent->GetComponentLocation(), Velocity, Mass);
@@ -17,7 +45,6 @@ void ACelestialBody::DrawDebugVelocityVector() const
 	                          100, FColor::Green, false);
 }
 
-//TODO: draw simulated future orbit
 void ACelestialBody::DrawDebugForces(const TArray<ACelestialBody*> allBodies, const float GravityConst)
 {
 	for (ACelestialBody *other : allBodies)
@@ -39,35 +66,5 @@ void ACelestialBody::DrawDebugForces(const TArray<ACelestialBody*> allBodies, co
 	}
 
 	DrawDebugVelocityVector();
-}
-
-
-void ACelestialBody::UpdatePosition(float DeltaTime)
-{
-	FQuat rotation = FQuat(1.0, 1.0, 1.0, 1.0);
-	RootComponent->MoveComponent(Velocity * DeltaTime, rotation, false);
-}
-
-// Sets default values
-ACelestialBody::ACelestialBody()
-{
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-}
-
-
-// Called when the game starts or when spawned
-void ACelestialBody::BeginPlay()
-{
-	Super::BeginPlay();
-	Velocity = InitialVelocity;
-}
-
-// Called every frame
-void ACelestialBody::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	Mass = SurfaceGravity * Radius * Radius; //gravityConst
 }
 

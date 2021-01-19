@@ -49,7 +49,7 @@ public:
 	void DrawDebugVelocityVector() const;
 	void DrawDebugForces(TArray<ACelestialBody*> allBodies, float GravityConst);
 
-	void UpdatePosition(float DeltaTime);
+	void UpdatePosition(float DeltaTime) const;
 
 	// Sets default values for this actor's properties
 	ACelestialBody();
@@ -61,5 +61,4 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };

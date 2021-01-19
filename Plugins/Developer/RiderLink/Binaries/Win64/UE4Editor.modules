@@ -1,7 +1,7 @@
 {
-	"BuildId": "680b2756-cec0-49d9-96ce-ea99317956e6",
+	"BuildId": "dedebfe2-9cd1-46d6-82e1-8d390607b9e5",
 	"Modules": 
 	{
-		"RiderLink": "UE4Editor-RiderLink-0112.dll"
+		"RiderLink": "UE4Editor-RiderLink.dll"
 	}
 }

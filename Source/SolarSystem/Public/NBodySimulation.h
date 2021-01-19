@@ -21,7 +21,7 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
     float Gravity;
 
 	UPROPERTY(EditAnywhere, Category = Debug)
-	float PathForecastLength;
+	float OrbitForecastLength;
 
 	UPROPERTY(EditAnywhere, Category = Debug)
 	float MassMultiplier;
@@ -44,7 +44,7 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	UPROPERTY(EditAnywhere)
     TArray<ACelestialBody*> Bodies;
 
-	void CalculateOrbits(TArray<FKinematicBody> kinematicBodies) const;
+	void UpdatePredictedOrbits(TArray<FKinematicBody>& kinematicBodies);
 
     // Called every frame
     virtual void Tick(float DeltaTime) override;
@@ -60,6 +60,9 @@ protected:
     UFUNCTION(BlueprintCallable, Category = LevelBlueprint)
     void DoSomething()
     {
-    	GLog->Log("Does something");
+    	GLog->Log("Does something");;
     }
+
+private:
+	void UpdatePredictedOrbitsStep(TArray<FKinematicBody>& kinematicBodies, FVector centralBodyInitPosition, int stepIndex);
 };
