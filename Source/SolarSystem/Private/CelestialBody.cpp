@@ -2,6 +2,8 @@
 
 #include "CelestialBody.h"
 #include "DrawDebugHelpers.h"
+#include "Programs/UnrealLightmass/Private/ImportExport/3DVisualizer.h"
+#include "Programs/UnrealLightmass/Private/ImportExport/3DVisualizer.h"
 
 // Sets default values
 ACelestialBody::ACelestialBody()
@@ -45,9 +47,9 @@ void ACelestialBody::DrawDebugVelocityVector() const
 	                          100, FColor::Green, false);
 }
 
-void ACelestialBody::DrawDebugForces(const TArray<ACelestialBody*> allBodies, const float GravityConst)
+void ACelestialBody::DrawDebugForces(TArray<ACelestialBody*> allBodies, const float GravityConst)
 {
-	for (ACelestialBody *other : allBodies)
+	for (const ACelestialBody* other : allBodies)
 	{
 		if (other == this)
 		{

@@ -47,7 +47,7 @@ public:
 	FKinematicBody GetKinematic() const;
 
 	void DrawDebugVelocityVector() const;
-	void DrawDebugForces(TArray<ACelestialBody*> allBodies, float GravityConst);
+	void DrawDebugForces(TArray<ACelestialBody*> allBodies, const float GravityConst);
 
 	void UpdatePosition(float DeltaTime) const;
 

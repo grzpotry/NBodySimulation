@@ -33,13 +33,13 @@ void ANBodySimulation::Tick(float DeltaTime)
 
 	if (bSimulate)
 	{
-		for (ACelestialBody* body : Bodies)
+		for (ACelestialBody*const body : Bodies)
 		{
 			body->Velocity = body->GetKinematic().CalculateVelocity(MassMultiplier, kinematicBodies, Gravity,DeltaTime * SpeedFactor);
 			body->DrawDebugForces(Bodies, Gravity);
 		}
 
-		for (ACelestialBody* body : Bodies)
+		for (ACelestialBody*const body : Bodies)
 		{
 			body->UpdatePosition(DeltaTime * SpeedFactor);
 		}
