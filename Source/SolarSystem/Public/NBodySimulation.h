@@ -35,13 +35,19 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	UPROPERTY(EditAnywhere, Category = Debug)
 	float SpeedFactor = 1.0;
 
+	UPROPERTY(EditAnywhere, Category = Debug)
+	int FocusedBodyIndex = 1;
+
+	UPROPERTY(EditAnywhere, Category = Debug)
+	float FocusedBodyIndex2 = 1;
+
 	UPROPERTY(EditAnywhere, Category = Debug, meta=(Description="test desc"))
 	float OrbitSamplingMultiplier;
 
 	UPROPERTY(EditInstanceOnly, Category = Physics)
 	ACelestialBody * CentralBody;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
     TArray<ACelestialBody*> Bodies;
 
 	void UpdatePredictedOrbits(TArray<FKinematicBody>& kinematicBodies);
