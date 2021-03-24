@@ -26,20 +26,6 @@ void ANBodySimulation::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FocusedBodyIndex = FMath::Clamp(FocusedBodyIndex, 0, Bodies.Num()- 1);
-
-	//ACameraActor* cameraActor = static_cast<ACameraActor*>(UGameplayStatics::GetActorOfClass(GetWorld(), ACameraActor::StaticClass()));
-	APlayerCameraManager* cameraManager = static_cast<APlayerCameraManager*>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCameraManager::StaticClass()));
-
-	FViewTargetTransitionParams TransitionParams;
-	TransitionParams.BlendTime = 10.0;
-	cameraManager->CameraStyle = FName(TEXT("FreeCam"));
-	cameraManager->SetViewTarget(Bodies[FocusedBodyIndex], TransitionParams);
-
-	//cameraActor->SetActorLocation(Bodies[FocusedBodyIndex]->GetActorLocation());
-	if(GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, FString::Printf(TEXT("Focused on body %s"), *Bodies[FocusedBodyIndex]->GetName()));
-
 	TArray<FKinematicBody> kinematicBodies;
 
 	for (ACelestialBody* body : Bodies)
@@ -64,6 +50,21 @@ void ANBodySimulation::Tick(float DeltaTime)
 	}
 
 	UpdatePredictedOrbits(kinematicBodies);
+}
+
+void ANBodySimulation::FocusOnBody(int bodyIndex)
+{
+	APlayerCameraManager* cameraManager = static_cast<APlayerCameraManager*>(UGameplayStatics::GetActorOfClass(GetWorld(), APlayerCameraManager::StaticClass()));
+
+	FViewTargetTransitionParams TransitionParams;
+	TransitionParams.BlendTime = 10.0;
+	cameraManager->CameraStyle = FName(TEXT("FreeCam"));
+	cameraManager->SetViewTarget(Bodies[bodyIndex], TransitionParams);
+
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red,
+		                                 FString::Printf(
+			                                 TEXT("Focused on body %s"), *Bodies[FocusedBodyIndex]->GetName()));
 }
 
 void ANBodySimulation::UpdatePredictedOrbits(TArray<FKinematicBody>& kinematicBodies)

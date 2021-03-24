@@ -47,6 +47,9 @@ class SOLARSYSTEM_API ANBodySimulation : public AActor
 	UPROPERTY(EditInstanceOnly, Category = Physics)
 	ACelestialBody * CentralBody;
 
+	UFUNCTION(BlueprintCallable)
+	void FocusOnBody(int bodyIndex);
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
     TArray<ACelestialBody*> Bodies;
 
